@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name = "description" content = "Портфолио КВА696" />
+		<meta name = "keywords" content = "Портфолио, КВА696" />
+		<meta name = "robots" content = "index,follow" />
+		<link rel="shortcut icon" href="./images/favicon.png" type="image/png">
+		<title>Портфолио</title>
+		<script src="./js/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/litezoom.js"></script>
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<script type="text/javascript">
+var array = new Array();
+var speed = 10;
+var timer = 10;
+
+// Loop through all the divs in the slider parent div //
+// Calculate seach content divs height and set it to a variable //
+function slider1(target,showfirst) {
+  var slider1 = document.getElementById(target);
+  var divs = slider1.getElementsByTagName('div');
+  var divslength = divs.length;
+  for(i = 0; i < divslength; i++) {
+    var div = divs[i];
+    var divid = div.id;
+    if(divid.indexOf("header") != -1) {
+      div.onclick = new Function("processClick(this)");
+    } else if(divid.indexOf("content") != -1) {
+      var section = divid.replace('-content','');
+      array.push(section);
+      div.maxh = div.offsetHeight;
+      if(showfirst == 1 && i == 1) {
+        div.style.display = 'block';
+      } else {
+        div.style.display = 'none';
+      }
+    }
+  }
+}
+
+// Process the click - expand the selected content and collapse the others //
+function processClick(div) {
+  var catlength = array.length;
+  for(i = 0; i < catlength; i++) {
+    var section = array[i];
+    var head = document.getElementById(section + '-header');
+    var cont = section + '-content';
+    var contdiv = document.getElementById(cont);
+    clearInterval(contdiv.timer);
+    if(head == div && contdiv.style.display == 'none') {
+      contdiv.style.height = '0px';
+      contdiv.style.display = 'block';
+      initSlide(cont,1);
+    } else if(contdiv.style.display == 'block') {
+      initSlide(cont,-1);
+    }
+  }
+}
+
+// Setup the variables and call the slide function //
+function initSlide(id,dir) {
+  var cont = document.getElementById(id);
+  var maxh = cont.maxh;
+  cont.direction = dir;
+  cont.timer = setInterval("slide('" + id + "')", timer);
+}
+
+// Collapse or expand the div by incrementally changing the divs height and opacity //
+function slide(id) {
+  var cont = document.getElementById(id);
+  var maxh = cont.maxh;
+  var currheight = cont.offsetHeight;
+  var dist;
+  if(cont.direction == 1) {
+    dist = (Math.round((maxh - currheight) / speed));
+  } else {
+    dist = (Math.round(currheight / speed));
+  }
+  if(dist <= 1) {
+    dist = 1;
+  }
+  cont.style.height = currheight + (dist * cont.direction) + 'px';
+  cont.style.opacity = currheight / cont.maxh;
+  cont.style.filter = 'alpha(opacity=' + (currheight * 100 / cont.maxh) + ')';
+  if(currheight < 2 && cont.direction != 1) {
+    cont.style.display = 'none';
+    clearInterval(cont.timer);
+  } else if(currheight > (maxh - 2) && cont.direction == 1) {
+    clearInterval(cont.timer);
+  }
+}
+</script>
+	</head>
+	<body style="margin: 0; padding: 0;background: url(./images/bg.jpg) repeat center center fixed;"  onload="slider1('slider1',0)">
+		<div style="margin: 0 auto; position: relative;width: 900px;background: #d9efd5">
+				<div style="position: absolute;left: 320px;">
+					<h1 align="center">Кучерук Виталий Александрович (КВА696)</h1>
+					kba696@ya.ru <a style="padding: 10px;" href="https://vk.com/kba696" target="_blank"><img style="height: 40px; -o-object-fit: cover; object-fit: cover; object-position: center;" src="./images/vk.png" /></a><br/><br/>
+					День рождения: 3 июля 1989 г.(30 лет)<br/><br/>
+					Обо мне в крации
+				</div>
+				<div class="slider" style="width: 300px;">
+					<div class="slider__wrapper">
+					  <div class="slider__item">
+						<div style="height: 380px;"><img style="width: 100%; -o-object-fit: cover; object-fit: cover; object-position: center;" class="fz__minimized" alt="клик для увеличения" src="./images/kba.jpg" /></div>
+					  </div>
+					  <div class="slider__item">
+						<div style="height: 380px;"><img style="width: 100%; -o-object-fit: cover; object-fit: cover; object-position: center;" class="fz__minimized" alt="клик для увеличения" src="./images/y1.jpg" /></div>
+					  </div>
+					</div>
+					<a class="slider__control slider__control_left" href="#" role="button"></a>
+					<a class="slider__control slider__control_right" href="#" role="button"></a>
+				</div>
+
+				<script type="text/javascript" src="./js/scrol.js"></script>
+				<script type="text/javascript">/*Увеличение картинки*/$('.fz__minimized').litezoom({speed:400, viewTitle:true});</script>
+				
+			<div class="back">
+
+			  <div id="two" class="abs block">
+				<a href="#one">Портфолио</a>
+				<b><a href="#two">Обо мне</a></b>
+				
+				<br/><br/>
+				
+			  </div>
+
+			  <div id="one" class="abs block">
+				<b><a href="#one">Портфолио</a></b>
+				<a href="#two">Обо мне</a>
+				<br/><br/>
+				<div id="slider1">
+					<div class="header" id="3-header">Игра "Запомни и собери" | Откры исх код 14.03.2020 | Игра сделанная на Unity</div>
+					<div class="content" id="3-content">
+						<div class="text">
+							Подробно про игру
+						</div>
+					</div>
+					<div class="header" id="2-header">OctopusClient | Закрытый исх код 7.02.2018 | Клиентская программа которая...</div>
+					<div class="content" id="2-content">
+						<div class="text">
+							Подробно про программу
+						</div>
+					</div>
+					<div class="header" id="1-header">КМЗClient и КМЗServer | Закрытый исх код 02.05.2017 | Клиентская программа которая...</div>
+					<div class="content" id="1-content">
+						<div class="text">
+							Подробно про программу
+						</div>
+					</div>
+				</div>
+			  </div>
+
+			</div>
+		</div>
+	</body>
+</html>

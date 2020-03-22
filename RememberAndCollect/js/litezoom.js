@@ -11,7 +11,7 @@
     init : function( options ) {
       var options = $.extend({
         speed: 400,
-        maxWidth: 600,
+        maxWidth: 900,
         imgPadding: 10,
         overlayOpacity: '0.5',
         viewTitle: false
