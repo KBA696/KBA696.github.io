@@ -11,7 +11,7 @@
     init : function( options ) {
       var options = $.extend({
         speed: 400,
-        maxWidth: 600,
+        maxWidth: 700,
         imgPadding: 10,
         overlayOpacity: '0.5',
         viewTitle: false
@@ -44,14 +44,14 @@
               "display": "none",
 
               "position": "fixed",
-              "max-width": options.maxWidth + "px",
-              "height": "auto",
+              "height": options.maxWidth + "px",
+              "max-width": "auto",
               "z-index": "9999",
               "padding": imgPadding,
               "background": "#FFFFFF",
         	  });
             $('#lz__magnify img').css({
-              "width": imgSize,
+              "height": imgSize,
               "margin": 0
             });
             $('#lz__magnify p').css({

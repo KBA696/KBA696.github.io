@@ -11,95 +11,31 @@
 		<script src="./js/jquery.min.js"></script>
 		<script type="text/javascript" src="./js/litezoom.js"></script>
 		<link rel="stylesheet" href="./css/style.css" type="text/css">
-		<script type="text/javascript">
-var array = new Array();
-var speed = 10;
-var timer = 10;
+		<script>
+		function declOfNum(number, titles) {
+		  cases = [2, 0, 1, 1, 1, 2];  
+		  return number+" "+titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
+		}
+		function birthDateToAge(b) {
+		 var n = new Date(), b = new Date(b),
+			 age = n.getFullYear() - b.getFullYear();
+		 return n.setFullYear(1972) < b.setFullYear(1972) ? age - 1 : age;
+		}
 
-// Loop through all the divs in the slider parent div //
-// Calculate seach content divs height and set it to a variable //
-function slider1(target,showfirst) {
-  var slider1 = document.getElementById(target);
-  var divs = slider1.getElementsByTagName('div');
-  var divslength = divs.length;
-  for(i = 0; i < divslength; i++) {
-    var div = divs[i];
-    var divid = div.id;
-    if(divid.indexOf("header") != -1) {
-      div.onclick = new Function("processClick(this)");
-    } else if(divid.indexOf("content") != -1) {
-      var section = divid.replace('-content','');
-      array.push(section);
-      div.maxh = div.offsetHeight;
-      if(showfirst == 1 && i == 1) {
-        div.style.display = 'block';
-      } else {
-        div.style.display = 'none';
-      }
-    }
-  }
-}
-
-// Process the click - expand the selected content and collapse the others //
-function processClick(div) {
-  var catlength = array.length;
-  for(i = 0; i < catlength; i++) {
-    var section = array[i];
-    var head = document.getElementById(section + '-header');
-    var cont = section + '-content';
-    var contdiv = document.getElementById(cont);
-    clearInterval(contdiv.timer);
-    if(head == div && contdiv.style.display == 'none') {
-      contdiv.style.height = '0px';
-      contdiv.style.display = 'block';
-      initSlide(cont,1);
-    } else if(contdiv.style.display == 'block') {
-      initSlide(cont,-1);
-    }
-  }
-}
-
-// Setup the variables and call the slide function //
-function initSlide(id,dir) {
-  var cont = document.getElementById(id);
-  var maxh = cont.maxh;
-  cont.direction = dir;
-  cont.timer = setInterval("slide('" + id + "')", timer);
-}
-
-// Collapse or expand the div by incrementally changing the divs height and opacity //
-function slide(id) {
-  var cont = document.getElementById(id);
-  var maxh = cont.maxh;
-  var currheight = cont.offsetHeight;
-  var dist;
-  if(cont.direction == 1) {
-    dist = (Math.round((maxh - currheight) / speed));
-  } else {
-    dist = (Math.round(currheight / speed));
-  }
-  if(dist <= 1) {
-    dist = 1;
-  }
-  cont.style.height = currheight + (dist * cont.direction) + 'px';
-  cont.style.opacity = currheight / cont.maxh;
-  cont.style.filter = 'alpha(opacity=' + (currheight * 100 / cont.maxh) + ')';
-  if(currheight < 2 && cont.direction != 1) {
-    cont.style.display = 'none';
-    clearInterval(cont.timer);
-  } else if(currheight > (maxh - 2) && cont.direction == 1) {
-    clearInterval(cont.timer);
-  }
-}
-</script>
+		function pri() {
+		  var el = document.getElementById('text_change');
+			el.innerHTML = declOfNum(birthDateToAge("1989-07-03"), ['год', 'года', 'лет']);  
+		}
+		</script>
 	</head>
-	<body style="margin: 0; padding: 0;background: url(./images/bg.jpg) repeat center center fixed;"  onload="slider1('slider1',0)">
-		<div style="margin: 0 auto; position: relative;width: 900px;background: #d9efd5">
+	<body style="margin: 0; padding: 0;background: url(./images/bg.jpg) repeat center center fixed;" onload="pri()">
+	
+		<div style="margin: 0 auto; position: relative;width: 900px;background: #ffffff">
+				<div style="position: absolute;right: 0px;background: url(./images/fons.jpg)no-repeat right bottom;width: 600px;height: 380px;background-size: 80%;"></div>
 				<div style="position: absolute;left: 320px;">
 					<h1 align="center">Кучерук Виталий Александрович (КВА696)</h1>
-					kba696@ya.ru <a style="padding: 10px;" href="https://vk.com/kba696" target="_blank"><img style="height: 40px; -o-object-fit: cover; object-fit: cover; object-position: center;" src="./images/vk.png" /></a><br/><br/>
-					День рождения: 3 июля 1989 г.(30 лет)<br/><br/>
-					Обо мне в крации
+					<div style="text-indent: 25px;font-size: 20px;line-height: 1.5;">День рождения: 3 июля 1989 г. (<span id='text_change'></span>)</div><br/><br/>
+					<div style="width: 400px;text-indent: 25px;font-size: 20px;line-height: 1.5;text-align:justify">Пишу прикладные программы под Windows на C# WPF если нужно сделать клиент-сервер, то через WCF, взаимодействие с базой данных осуществляю через ADO.NET. </div>
 				</div>
 				<div class="slider" style="width: 300px;">
 					<div class="slider__wrapper">
@@ -111,49 +47,197 @@ function slide(id) {
 					  </div>
 					</div>
 					<a class="slider__control slider__control_left" href="#" role="button"></a>
-					<a class="slider__control slider__control_right" href="#" role="button"></a>
+					<a class="slider__control slider__control_right" style="margin-right: 0px;" href="#" role="button"></a>
 				</div>
 
-				<script type="text/javascript" src="./js/scrol.js"></script>
-				<script type="text/javascript">/*Увеличение картинки*/$('.fz__minimized').litezoom({speed:400, viewTitle:true});</script>
 				
-			<div class="back">
+			<div class="back" >
 
-			  <div id="two" class="abs block">
-				<a href="#one">Портфолио</a>
-				<b><a href="#two">Обо мне</a></b>
-				
-				<br/><br/>
-				
+			<div id="tab" class="abs block" style="background: #a9f5b6">
+				<div style="background: #ffffff;width: 100%;height: 50px;">
+					<a href="https://nick-name.ru/nickname/KBA696/" style="float: right;"><img src="https://nick-name.ru/img.php?nick=%D0%9A%D0%92%D0%90696&amp;sert=23&amp;text=t0" alt="КВА696"></a>
+					<div style="position: relative;background: #eceaea;float: left;height: 30px;padding-top: 20px;border-radius: 10px 10px 0px 0;"><a style="margin: 20px;" href="#one">Портфолио</a></div>
+					<div style="position: relative;background: #f5d8b4;float: left;height: 30px;padding-top: 20px;border-radius: 10px 10px 0px 0;"><a style="margin: 20px;" href="#two" >Обо мне</a></div>
+					<div style="position: relative;background: #a9f5b6;float: left;height: 30px;padding-top: 20px;border-radius: 10px 10px 0px 0;"><b><a style="margin: 20px;" href="#tab" >Обратная связь</a></b></div>
+				</div>
+				<br/>
+
+				<div style="margin-left: 20px;">
+					 
+					<div style="white-space:nowrap">
+						<div style="width:70px;display:inline-block;black;text-align: center;">kba696@ya.ru<br/><a href="mailto:kba696@ya.ru" target="_blank"><img style="padding-left: 20px;height: 40px; -o-object-fit: cover; object-fit: cover; object-position: center;" src="./images/main-favicon.png" /></a></div>
+					</div>
+					
+					<br/><br/>
+					
+					<div style="white-space:nowrap">
+						<div style="padding-left: 10px;width:70px;display:inline-block;black;text-align: center;"><a href="https://vk.com/kba696" target="_blank"><img style="height: 40px; -o-object-fit: cover; object-fit: cover; object-position: center;" src="./images/vk.png" /></a></div>
+						<div style="width:110px;display:inline-block;black;text-align: center;"><a href="https://ok.ru/kba696" target="_blank"><img style="height: 40px; -o-object-fit: cover; object-fit: cover; object-position: center;" src="./images/ok.jpg" /></a></div>
+						<div style="width:110px;display:inline-block;black;text-align: center;"><a href="https://www.facebook.com/kba696" target="_blank"><img style="height: 40px; -o-object-fit: cover; object-fit: cover; object-position: center;" src="./images/facebook.png" /></a></div>						
+					</div>					
+					
+					<br/><br/>
+					
+					<div style="white-space:nowrap">
+						<div style="width:70px;display:inline-block;black;text-align: center;"><a href="https://join.skype.com/invite/iiQcBm41y6qs?add" target="_blank">kva696<br/><img style="padding-left: 15px;height: 40px; -o-object-fit: cover; object-fit: cover; object-position: center;" src="./images/Skype.ico" /></a></div>
+						<div style="width:110px;display:inline-block;black;text-align: center;"><a href="https://wa.me/79064012166" target="_blank">+79064012166<br/><img style="padding-left: 15px;height: 40px; -o-object-fit: cover; object-fit: cover; object-position: center;" src="./images/whatsapp.png" /></a></div>
+						<div style="width:110px;display:inline-block;black;text-align: center;"><a href="https://viber.click/79064012166" target="_blank">+79064012166<br/><img style="padding-left: 15px;height: 40px; -o-object-fit: cover; object-fit: cover; object-position: center;" src="./images/viber.png" /></a></div>						
+					</div>
+					<br/><br/>
+				</div>
+				<br/>
+			  </div>
+			
+			  <div id="two" class="abs block" style="background: #f5d8b4;">
+				<div style="background: #ffffff;width: 100%;height: 50px;">
+					<a href="https://nick-name.ru/nickname/KBA696/" style="float: right;"><img src="https://nick-name.ru/img.php?nick=%D0%9A%D0%92%D0%90696&amp;sert=23&amp;text=t0" alt="КВА696"></a>
+					<div style="position: relative;background: #eceaea;float: left;height: 30px;padding-top: 20px;border-radius: 10px 10px 0px 0;"><a style="margin: 20px;" href="#one">Портфолио</a></div>
+					<div style="position: relative;background: #f5d8b4;float: left;height: 30px;padding-top: 20px;border-radius: 10px 10px 0px 0;"><b><a style="margin: 20px;" href="#two" >Обо мне</a></b></div>
+					<div style="position: relative;background: #a9f5b6;float: left;height: 30px;padding-top: 20px;border-radius: 10px 10px 0px 0;"><a style="margin: 20px;" href="#tab" >Обратная связь</a></div>
+				</div>
+				<br/>
+
+				<div class="demo">
+					<input class="hide" id="hd-5003" type="checkbox">
+					<label for="hd-5003">Образование - Выпускник (бакалавр), Факультет «Информационные технологии»</label>
+					<div style="font-size: 20px;line-height: 1.5;text-align:justify">
+						Вузы: <br/><br/>
+
+						КТИ (филиал ВолгГТУ) 2020<br/>
+						Факультет: Факультет «Информационные технологии»<br/>
+						Специальность: Кафедра «Информатика»<br/>
+						Форма обучения: Заочное отделение<br/>
+						Статус: Выпускник (бакалавр)<br/><br/>
+
+						КТИ (филиал ВолгГТУ) 2009<br/>
+						Факультет: Среднетехнический факультет<br/>
+						Специальность: Технология машиностроения<br/>
+						Форма обучения: Очное отделение<br/>
+						Статус: Выпускник (специалист)<br/><br/>
+
+
+						Школы: <br/><br/>
+
+						Школа №7 2006<br/>
+						Камышин, 2003–2006 (а) МЧС класс<br/><br/>
+
+						Школа №7<br/>
+						Камышин, 2002–2003 (г)<br/><br/>
+
+						Школа №12 имени Героя России А. Колгатина<br/>
+						Камышин, 1999–2002 (в) Военный класс<br/><br/>
+
+						Школа №13<br/>
+						Камышин, 1998–1999<br/><br/>
+
+						Школа № 5<br/>
+						Сосновый Бор (поселок), 1996–1998<br/>
+					</div>
+						<br/>
+						<br/>
+					<input class="hide" id="hd-5002" type="checkbox">
+					<label for="hd-5002">Опыт работы - с 2014 г. Техник-технолог, Машзавод, г. Камышин</label>
+					<div style="font-size: 20px;line-height: 1.5;text-align:justify">
+						с 2014 г.<br/>
+						Техник-технолог<br/>
+						Машзавод<br/>
+						г. Камышин <br/><br/>
+
+						2011–2014<br/>
+						Инженер-геодезист<br/>
+						ООО "ПГЭС" Волгоградский филиал<br/>
+						г. Камышин <br/><br/>
+
+						2010–2011<br/>
+						Водолаз-спасатель<br/>
+						ВОСС<br/>
+						г. Камышин<br/><br/>
+
+						2010–2010<br/>
+						Войсковая часть 13140 Казачка, Морская пехота, Десантно-Штурмовой Батальон<br/>
+						Украина Севостополь.<br/><br/>
+
+						2009–2010<br/>
+						Войсковая часть 20205 Школа водолазов<br/>
+						Украина Севостополь.<br/><br/>
+
+
+						2009–2009<br/>
+						Слесарь-ремонтник<br/>
+						Завод "СМИ"<br/>
+						г. Камышин <br/><br/>
+					</div>
+						<br/>
+						<br/>
+				</div>
+				<br/>
 			  </div>
 
 			  <div id="one" class="abs block">
-				<b><a href="#one">Портфолио</a></b>
-				<a href="#two">Обо мне</a>
-				<br/><br/>
-				<div id="slider1">
-					<div class="header" id="3-header">Игра "Запомни и собери" | Откры исх код 14.03.2020 | Игра сделанная на Unity</div>
-					<div class="content" id="3-content">
-						<div class="text">
-							Подробно про игру
-						</div>
+				<div style="background: #ffffff;width: 100%;height: 50px;">
+					<a href="https://nick-name.ru/nickname/KBA696/" style="float: right;"><img src="https://nick-name.ru/img.php?nick=%D0%9A%D0%92%D0%90696&amp;sert=23&amp;text=t0" alt="КВА696"></a>
+					<div style="position: relative;background: #eceaea;float: left;height: 30px;padding-top: 20px;border-radius: 10px 10px 0px 0;"><b><a style="margin: 20px;" href="#one">Портфолио</a></b></div>
+					<div style="position: relative;background: #f5d8b4;float: left;height: 30px;padding-top: 20px;border-radius: 10px 10px 0px 0;"><a style="margin: 20px;" href="#two" >Обо мне</a></div>
+					<div style="position: relative;background: #a9f5b6;float: left;height: 30px;padding-top: 20px;border-radius: 10px 10px 0px 0;"><a style="margin: 20px;" href="#tab" >Обратная связь</a></div>
+				</div>
+				<br/>
+				<div class="demo">
+					<input class="hide" id="hd-3" type="checkbox" checked>
+					<label for="hd-3">
+						<div style="position: relative;width: 300px;float:left">Игра "Запомни и собери"</div>
+						<div style="position: relative;float:left">&nbsp;|&nbsp;</div>
+						<div style="position: relative;float:left;"><svg aria-label="Repository" style="color: #6a737d!important" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path></svg></div>
+						<div style="position: relative;width: 90px;float:left">&nbsp;14.03.2020</div>
+						<div style="position: relative;float:left">&nbsp;|&nbsp;</div>
+						<div style="position: relative;float:left">Unity и Visual Studio 2019</div>
+					</label>
+					<div style="text-indent: 25px;font-size: 20px;line-height: 1.5;text-align:justify">
+						Игра <a style="color: #30f;" href="KBA696.github.io/RememberAndCollect">"Запомни и собери"</a> c <a style="color: #30f;" href="https://github.com/KBA696/RememberAndCollect">открытым исходным кодом</a> создана на Unity и Visual Studio 2019. Суть игры запомнить в какой последовательности расположены шарики и собрать их в таком же порядке. Игра выложена в Google Play, ВК и однокласниках.<br/><br/>
+						<img style="height: 100px; -o-object-fit: cover; object-fit: cover; object-position: center;" class="fz__minimized" alt="клик для увеличения" src="./RememberAndCollect/images/1.jpg" />
+						<img style="height: 100px; -o-object-fit: cover; object-fit: cover; object-position: center;" class="fz__minimized" alt="клик для увеличения" src="./RememberAndCollect/images/2.jpg" />
+						<img style="height: 100px; -o-object-fit: cover; object-fit: cover; object-position: center;" class="fz__minimized" alt="клик для увеличения" src="./RememberAndCollect/images/3.jpg" />
 					</div>
-					<div class="header" id="2-header">OctopusClient | Закрытый исх код 7.02.2018 | Клиентская программа которая...</div>
-					<div class="content" id="2-content">
-						<div class="text">
-							Подробно про программу
-						</div>
+						<br/>
+						<br/>
+					<input class="hide" id="hd-2" type="checkbox">
+					<label for="hd-2">
+						<div style="position: relative;width: 300px;float:left">Программа "OctopusClient"</div>
+						<div style="position: relative;float:left">&nbsp;|&nbsp;</div>
+						<div style="position: relative;float:left;"><svg style="fill: #dbab09;" aria-label="Repository" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M4 13H3v-1h1v1zm8-6v7c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h1V4c0-2.2 1.8-4 4-4s4 1.8 4 4v2h1c.55 0 1 .45 1 1zM3.8 6h4.41V4c0-1.22-.98-2.2-2.2-2.2-1.22 0-2.2.98-2.2 2.2v2H3.8zM11 7H2v7h9V7zM4 8H3v1h1V8zm0 2H3v1h1v-1z"></path></svg></div>
+						<div style="position: relative;width: 90px;float:left">&nbsp;07.02.2018</div>
+						<div style="position: relative;float:left">&nbsp;|&nbsp;</div>
+						<div style="position: relative;float:left">WPF, WCF и работа с базой данных через ADO.NET</div>
+					</label>
+					<div style="text-indent: 25px;font-size: 20px;line-height: 1.5;text-align:justify">
+						"OctopusClient" - это программа для дисплеев которые показывают рекламу. Интерфейс отсутствует. При запуске воспроизводит лого и запрашивает у сайта какой контент воспроизводить, после скачивания воспроизводит. WCF служит для общения сайта с клиентом (отправить на перезагрузку, получить статус(состояние) дисплея и т.д.).
 					</div>
-					<div class="header" id="1-header">КМЗClient и КМЗServer | Закрытый исх код 02.05.2017 | Клиентская программа которая...</div>
-					<div class="content" id="1-content">
-						<div class="text">
-							Подробно про программу
-						</div>
+						<br/>
+						<br/>
+					<input class="hide" id="hd-1" type="checkbox">
+					<label for="hd-1">
+						<div style="position: relative;width: 300px;float:left">Программы "КМЗClient" и "КМЗServer"</div>
+						<div style="position: relative;float:left">&nbsp;|&nbsp;</div>
+						<div style="position: relative;float:left;"><svg style="fill: #dbab09;" aria-label="Repository" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M4 13H3v-1h1v1zm8-6v7c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h1V4c0-2.2 1.8-4 4-4s4 1.8 4 4v2h1c.55 0 1 .45 1 1zM3.8 6h4.41V4c0-1.22-.98-2.2-2.2-2.2-1.22 0-2.2.98-2.2 2.2v2H3.8zM11 7H2v7h9V7zM4 8H3v1h1V8zm0 2H3v1h1v-1z"></path></svg></div>
+						<div style="position: relative;width: 90px;float:left">&nbsp;02.05.2017</div>
+						<div style="position: relative;float:left">&nbsp;|&nbsp;</div>
+						<div style="position: relative;float:left">WPF, WCF и работа с базой данных через ADO.NET</br>&nbsp;</div>
+					</label>
+					<div style="text-indent: 25px;font-size: 20px;line-height: 1.5;text-align:justify">
+						Программы "КМЗClient" и "КМЗServer" написаны для облегчения, ускорения и автоматизации моей работы и нескольких коллег. Код закрыт так как содержит специфические данные которые не пригодятся никому и не подойдет для других заводов. Программа хранит заявки на производства, а к ним подкрепляются чертежи, по которым изготавливается данная продукция и нормы расхода. Сервер однопоточный с возможностью обновления на клиенте только изменённых файлов.<br/><br/>
+						<img style="height: 100px; -o-object-fit: cover; object-fit: cover; object-position: center;" class="fz__minimized" alt="клик для увеличения" src="./images/КМЗ1.jpg" />
+						<img style="height: 100px; -o-object-fit: cover; object-fit: cover; object-position: center;" class="fz__minimized" alt="клик для увеличения" src="./images/КМЗ2.jpg" />
+						<img style="height: 100px; -o-object-fit: cover; object-fit: cover; object-position: center;" class="fz__minimized" alt="клик для увеличения" src="./images/КМЗ3.jpg" />
+						<img style="height: 100px; -o-object-fit: cover; object-fit: cover; object-position: center;" class="fz__minimized" alt="клик для увеличения" src="./images/КМЗ4.jpg" />
+						<img style="height: 100px; -o-object-fit: cover; object-fit: cover; object-position: center;" class="fz__minimized" alt="клик для увеличения" src="./images/КМЗ5.jpg" />
 					</div>
 				</div>
+				<br/>
 			  </div>
 
 			</div>
 		</div>
+		
+		<script type="text/javascript" src="./js/scrol.js"></script>
+		<script type="text/javascript">/*Увеличение картинки*/$('.fz__minimized').litezoom({speed:400, viewTitle:true});</script>
 	</body>
 </html>
